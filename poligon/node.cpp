@@ -4,7 +4,7 @@ Node::Node()
 	: value{-1}
 {}
 
-Node::Node(QPoint coordinates)
+Node::Node(QPointF coordinates)
 	: coordinates{coordinates},
 	value{-1}
 {}
@@ -24,7 +24,7 @@ int Node::getValue() const
 	return value;
 }
 
-QPoint Node::getCoordinates() const
+QPointF Node::getCoordinates() const
 {
 	return coordinates;
 }
@@ -49,7 +49,7 @@ void Node::setValue(int value)
 	this->value = value;
 }
 
-void Node::setCoordinates(QPoint position)
+void Node::setCoordinates(QPointF position)
 {
 	coordinates = position;
 }

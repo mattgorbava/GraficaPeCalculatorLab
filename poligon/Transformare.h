@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QPoint>
+#include <QPointF>
 
 class Transformare
 {
@@ -34,21 +34,21 @@ public:
 			);
 		}
 
-		QPoint operator*(QPoint point)
+		QPointF operator*(QPointF point)
 		{
-			return QPoint(
+			return QPointF(
 				a * point.x() + b * point.y() + c,
 				d * point.x() + e * point.y() + f
 			);
 		}
 	};
 
-	static QPoint rotatePointAroundOrigin(QPoint point, double angle);
-	static QPoint scalePointAroundOrigin(QPoint point, double scaleX, double scaleY);
-	static QPoint translatePoint(QPoint point, int dx, int dy);
-	static QPoint symmetricalPointByOrigin(QPoint point);
+	static QPointF rotatePointAroundOrigin(QPointF point, double angle);
+	static QPointF scalePointAroundOrigin(QPointF point, double scaleX, double scaleY);
+	static QPointF translatePoint(QPointF point, int dx, int dy);
+	static QPointF symmetricalPointByOrigin(QPointF point);
 
-	static QPoint rotatePointAroundPoint(QPoint point, QPoint center, double angle);
-	static QPoint scalePointAroundPoint(QPoint point, QPoint center, double scaleX, double scaleY);
-	static QPoint symmetricalPointByEdge(QPoint point, QPoint edgePoint, Vector d);
+	static QPointF rotatePointAroundPoint(QPointF point, QPointF center, double angle);
+	static QPointF scalePointAroundPoint(QPointF point, QPointF center, double scaleX, double scaleY);
+	static QPointF symmetricalPointByEdge(QPointF point, QPointF edgePoint, Vector d);
 };

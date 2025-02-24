@@ -7,6 +7,7 @@ mainwindow::mainwindow(QWidget *parent)
 {
     ui.setupUi(this);
     this->setFixedSize(1000, 600);
+    setMouseTracking(true);
 
     xLabel.setParent(this);
     yLabel.setParent(this);
@@ -103,30 +104,36 @@ void mainwindow::initializeSliders()
     scalingXSlider.setEnabled(true);
     scalingYSlider.setEnabled(true);
 
-    rotationSlider.setRange(0, 360);
+    rotationSlider.setRange(-180, 180);
     translationXSlider.setRange(-100, 100);
     translationYSlider.setRange(-100, 100);
     scalingXSlider.setRange(0, 200);
     scalingYSlider.setRange(0, 200);
 
     polygon.computeCenterOfMass();
-    QPoint centerOfMass = polygon.getCenterOfMass();
+    QPointF centerOfMass = polygon.getCenterOfMass();
 
     double normalizedX = (centerOfMass.x() - 400) / 400.0;
     double normalizedY = (centerOfMass.y() - 300) / 300.0;
 
-    translationXSlider.setValue(static_cast<int>(normalizedX * 100));
-    translationYSlider.setValue(static_cast<int>(normalizedY * 100));
+    /*translationXSlider.setValue(static_cast<int>(normalizedX * 100));
+    translationYSlider.setValue(static_cast<int>(normalizedY * 100));*/
     
-    double angleRadians = atan2(centerOfMass.y() - 300, centerOfMass.x() - 400);
+    /*double angleRadians = atan2(centerOfMass.y() - 300, centerOfMass.x() - 400);
     int angleDegrees = static_cast<int>(angleRadians * 180.0 / M_PI);
     if (angleDegrees < 0) {
         angleDegrees += 360;
-    }
-    rotationSlider.setValue(angleDegrees);
+    }*/
+
+    translationXSlider.setValue(0);
+    translationYSlider.setValue(0);
+
+    rotationSlider.setValue(0);
 
     scalingXSlider.setValue(100); 
     scalingYSlider.setValue(100); 
+
+    initialized = true;
 }
 
 void mainwindow::mouseReleaseEvent(QMouseEvent* e)
@@ -161,8 +168,8 @@ void mainwindow::mouseReleaseEvent(QMouseEvent* e)
                         firstNode = node;
                     else
                     {
-                        QPoint point1 = firstNode->getCoordinates();
-                        QPoint point2 = node->getCoordinates();
+                        QPointF point1 = firstNode->getCoordinates();
+                        QPointF point2 = node->getCoordinates();
                         if (firstNode == node)
 							break;
                         if (firstNode->getAdjacentNodesCounter() >= 2 || node->getAdjacentNodesCounter() >= 2)
@@ -253,29 +260,36 @@ void mainwindow::paintEvent(QPaintEvent* e)
 
 void mainwindow::onRotationSliderChanged(int value)
 {
+    if (!initialized)
+        return;
     double angle = value - rotationAngle;
     rotationAngle = value;
     polygon.computeCenterOfMass();
-    QPoint centerOfMass = polygon.getCenterOfMass();
+    QPointF centerOfMass = polygon.getCenterOfMass();
     for (auto& node : polygon.getNodes())
     {
-        node->setCoordinates(Transformare::rotatePointAroundPoint(node->getCoordinates(), QPoint(400, 300), angle)) ;
+        node->setCoordinates(Transformare::rotatePointAroundPoint(node->getCoordinates(), centerOfMass, angle)) ;
     }
     update();
 }
 
 void mainwindow::onScalingXSliderChanged(int value)
 {
+    if (!initialized)
+        return;
 	double scale = value / 100.0;
+    QPointF centerOfMass = polygon.getCenterOfMass();
 	for (auto& node : polygon.getNodes())
 	{
-        node->setCoordinates(Transformare::scalePointAroundPoint(node->getCoordinates(), QPoint(400, 300), scale, 1));
+        node->setCoordinates(Transformare::scalePointAroundPoint(node->getCoordinates(), centerOfMass, scale, 1));
 	}
 	update();
 }
 
 void mainwindow::onScalingYSliderChanged(int value)
 {
+    if (!initialized)
+        return;
 	double scale = value / 100.0;
 	for (auto& node : polygon.getNodes())
 	{
@@ -286,6 +300,8 @@ void mainwindow::onScalingYSliderChanged(int value)
 
 void mainwindow::onTranslationXSliderChanged(int value)
 {
+    if (!initialized)
+        return;
 	double translationX = value / 100.0;
 	double translationY = translationYSlider.value() / 100.0;
 	for (auto& node : polygon.getNodes())
@@ -297,6 +313,8 @@ void mainwindow::onTranslationXSliderChanged(int value)
 
 void mainwindow::onTranslationYSliderChanged(int value)
 {
+    if (!initialized)
+        return;
 	double translationY = value / 100.0;
 	double translationX = translationXSlider.value() / 100.0;
 	for (auto& node : polygon.getNodes())
@@ -318,6 +336,21 @@ void mainwindow::mouseMoveEvent(QMouseEvent* e)
             update();
         }
     }
+    else
+    {
+        if (shiftPressed)
+        {
+            double angle = e->pos().x() - mouseLastPosition.x();
+            polygon.computeCenterOfMass();
+            QPointF centerOfMass = polygon.getCenterOfMass();
+            for (auto& node : polygon.getNodes())
+            {
+                node->setCoordinates(Transformare::rotatePointAroundPoint(node->getCoordinates(), centerOfMass, angle));
+            }
+            update();
+        }
+    }
+    mouseLastPosition = e->pos();
 }
 
 void mainwindow::mousePressEvent(QMouseEvent* e)
@@ -335,6 +368,22 @@ void mainwindow::mousePressEvent(QMouseEvent* e)
             }
         }
     }
+}
+
+void mainwindow::keyPressEvent(QKeyEvent* event)
+{
+    if (event->key() == Qt::Key_Shift)
+    {
+        shiftPressed = true;
+    }
+}
+
+void mainwindow::keyReleaseEvent(QKeyEvent* event)
+{
+	if (event->key() == Qt::Key_Shift)
+	{
+		shiftPressed = false;
+	}
 }
 
 bool mainwindow::isPolygonClosed()

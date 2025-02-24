@@ -21,6 +21,8 @@ public:
     virtual void mousePressEvent(QMouseEvent* event) override;
     virtual void mouseMoveEvent(QMouseEvent* event) override;
     virtual void paintEvent(QPaintEvent* event) override;
+    virtual void keyPressEvent(QKeyEvent* event) override;
+    virtual void keyReleaseEvent(QKeyEvent* event) override;
     ~mainwindow();
 
 private slots:
@@ -32,6 +34,11 @@ private slots:
 
 private:
     void initializeSliders();
+    bool initialized = false;
+
+    bool shiftPressed = false;
+
+    QPoint mouseLastPosition;
 
     Ui::mainwindowClass ui;
     Polygon polygon;

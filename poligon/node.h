@@ -1,29 +1,29 @@
 #pragma once
 
-#include <QPoint>
+#include <QPointF>
 #include <QGraphicsItem>
 
 class Node
 {
 public:
 	Node();
-	Node(QPoint coordinates);
+	Node(QPointF coordinates);
 	~Node() = default;
 
 	int getCoordX() const;
 	int getCoordY() const;
 	int getValue() const;
-	QPoint getCoordinates() const;
+	QPointF getCoordinates() const;
 	int getAdjacentNodesCounter() const;
 
 	void setCoordX(int x);
 	void setCoordY(int y);
 	void setValue(int value);
-	void setCoordinates(QPoint position);
+	void setCoordinates(QPointF position);
 	void incrementAdjacentNodesCounter();
 
 private:
-	QPoint coordinates;
+	QPointF coordinates;
 	int value;
 	int adjacentNodesCounter = 0;
 };

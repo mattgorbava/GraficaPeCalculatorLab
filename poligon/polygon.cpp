@@ -3,7 +3,7 @@
 Polygon::Polygon()
 {}
 
-void Polygon::addNode(QPoint coordinates)
+void Polygon::addNode(QPointF coordinates)
 {
 	Node* node = new Node(coordinates);
 	node->setValue(nodes.size() + 1);
@@ -41,6 +41,7 @@ std::vector<Edge*> Polygon::getEdges() const
 
 void Polygon::computeCenterOfMass()
 {
+	centerOfMass = QPointF(0, 0);
 	for (Node* node : nodes)
 	{
 		centerOfMass.setX(centerOfMass.x() + node->getCoordX());
@@ -50,7 +51,7 @@ void Polygon::computeCenterOfMass()
 	centerOfMass.setY(centerOfMass.y() / nodes.size());
 }
 
-QPoint Polygon::getCenterOfMass() const
+QPointF Polygon::getCenterOfMass() const
 {
 	return centerOfMass;
 }
