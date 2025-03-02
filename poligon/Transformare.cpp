@@ -29,6 +29,12 @@ QPointF Transformare::symmetricalPointByOrigin(QPointF point)
 	return symmetricalMatrix * point;
 }
 
+QPointF Transformare::symmetricalPointByOx(QPointF point)
+{
+	Matrix symmetricalMatrix(1, 0, 0, 0, -1, 0, 0, 0, 1);
+	return symmetricalMatrix * point;
+}
+
 QPointF Transformare::rotatePointAroundPoint(QPointF point, QPointF center, double angle)
 {
 	return translatePoint(rotatePointAroundOrigin(translatePoint(point, -center.x(), -center.y()), angle), center.x(), center.y());
@@ -37,4 +43,27 @@ QPointF Transformare::rotatePointAroundPoint(QPointF point, QPointF center, doub
 QPointF Transformare::scalePointAroundPoint(QPointF point, QPointF center, double scaleX, double scaleY)
 {
 	return translatePoint(scalePointAroundOrigin(translatePoint(point, -center.x(), -center.y()), scaleX, scaleY), center.x(), center.y());
+}
+
+QPointF Transformare::symmetricalPointByEdge(QPointF point, QPointF edgePoint, Vector d)
+{
+	double angle = calculateAngleWithOX(edgePoint, d);
+	return translatePoint(
+		rotatePointAroundOrigin(
+			symmetricalPointByOx(
+				rotatePointAroundOrigin(
+					translatePoint(point, -edgePoint.x(), -edgePoint.y()), -angle)), angle), edgePoint.x(), edgePoint.y());
+}
+
+double Transformare::calculateAngleWithOX(QPointF edgePoint, Vector d)
+{
+	double magnitude = std::sqrt(d.x * d.x + d.y * d.y + d.z * d.z);
+
+	double cosTheta = d.x / magnitude;
+
+	double angle = std::acos(cosTheta);
+
+	double angleInDegrees = angle * (180.0 / PI);
+
+	return angleInDegrees;
 }

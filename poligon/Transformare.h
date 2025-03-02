@@ -47,8 +47,11 @@ public:
 	static QPointF scalePointAroundOrigin(QPointF point, double scaleX, double scaleY);
 	static QPointF translatePoint(QPointF point, int dx, int dy);
 	static QPointF symmetricalPointByOrigin(QPointF point);
+	static QPointF symmetricalPointByOx(QPointF point);
 
 	static QPointF rotatePointAroundPoint(QPointF point, QPointF center, double angle);
 	static QPointF scalePointAroundPoint(QPointF point, QPointF center, double scaleX, double scaleY);
 	static QPointF symmetricalPointByEdge(QPointF point, QPointF edgePoint, Vector d);
+
+	static double calculateAngleWithOX(QPointF edgePoint, Vector d);
 };

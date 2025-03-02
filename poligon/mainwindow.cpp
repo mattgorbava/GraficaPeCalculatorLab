@@ -6,135 +6,12 @@ mainwindow::mainwindow(QWidget *parent)
     : QMainWindow(parent)
 {
     ui.setupUi(this);
-    this->setFixedSize(1000, 600);
+    this->setFixedSize(800, 600);
     setMouseTracking(true);
-
-    xLabel.setParent(this);
-    yLabel.setParent(this);
-    oLabel.setParent(this);
-
-    xLabel.setAlignment(Qt::AlignTop | Qt::AlignLeft);
-    yLabel.setAlignment(Qt::AlignTop | Qt::AlignLeft);
-    oLabel.setAlignment(Qt::AlignTop | Qt::AlignLeft);
-
-    xLabel.move(785, 290); 
-    yLabel.move(400, 570); 
-    oLabel.move(380, 280);
-
-    xLabel.show();
-    yLabel.show();
-    oLabel.show();
-
-    /*clearButton.setParent(this);
-    clearButton.setText("Clear");
-    clearButton.move(800, 10);
-    clearButton.show();*/
-
-    int sliderWidth = 150;
-    int sliderHeight = 20;
-    int labelHeight = 20;
-    int rightMargin = 20;
-    int topMargin = 15;
-    int spacing = 15;
-
-    rotationLabel.setParent(this);
-    translationXLabel.setParent(this);
-    translationYLabel.setParent(this);
-    scalingXLabel.setParent(this);
-    scalingYLabel.setParent(this);
-
-    rotationSlider.setParent(this);
-    translationXSlider.setParent(this);
-    translationYSlider.setParent(this);
-    scalingXSlider.setParent(this);
-    scalingYSlider.setParent(this);
-
-    rotationLabel.setGeometry(width() - sliderWidth - rightMargin, topMargin, sliderWidth, labelHeight);
-    rotationSlider.setGeometry(width() - sliderWidth - rightMargin, topMargin + labelHeight, sliderWidth, sliderHeight);
-    rotationSlider.setOrientation(Qt::Horizontal);
-    rotationSlider.setEnabled(false);
-
-    translationXLabel.setGeometry(width() - sliderWidth - rightMargin, topMargin + labelHeight + sliderHeight + spacing, sliderWidth, labelHeight);
-    translationXSlider.setGeometry(width() - sliderWidth - rightMargin, topMargin + labelHeight + 2 * (sliderHeight + spacing), sliderWidth, sliderHeight);
-    translationXSlider.setOrientation(Qt::Horizontal);
-    translationXSlider.setEnabled(false);
-
-    translationYLabel.setGeometry(width() - sliderWidth - rightMargin, topMargin + labelHeight + 2 * (sliderHeight + spacing) + labelHeight + spacing, sliderWidth, labelHeight);
-    translationYSlider.setGeometry(width() - sliderWidth - rightMargin, topMargin + labelHeight + 3 * (sliderHeight + spacing) + labelHeight + spacing, sliderWidth, sliderHeight);
-    translationYSlider.setOrientation(Qt::Horizontal);
-    translationYSlider.setEnabled(false);
-
-    scalingXLabel.setGeometry(width() - sliderWidth - rightMargin, topMargin + labelHeight + 3 * (sliderHeight + spacing) + 2 * (labelHeight + spacing), sliderWidth, labelHeight);
-    scalingXSlider.setGeometry(width() - sliderWidth - rightMargin, topMargin + labelHeight + 4 * (sliderHeight + spacing) + 2 * (labelHeight + spacing), sliderWidth, sliderHeight);
-    scalingXSlider.setOrientation(Qt::Horizontal);
-    scalingXSlider.setEnabled(false);
-
-    scalingYLabel.setGeometry(width() - sliderWidth - rightMargin, topMargin + labelHeight + 4 * (sliderHeight + spacing) + 3 * (labelHeight + spacing), sliderWidth, labelHeight);
-    scalingYSlider.setGeometry(width() - sliderWidth - rightMargin, topMargin + labelHeight + 5 * (sliderHeight + spacing) + 3 * (labelHeight + spacing), sliderWidth, sliderHeight);
-    scalingYSlider.setOrientation(Qt::Horizontal);
-    scalingYSlider.setEnabled(false);
-
-    connect(&rotationSlider, &QSlider::valueChanged, this, &mainwindow::onRotationSliderChanged);
-    connect(&translationXSlider, &QSlider::valueChanged, this, &mainwindow::onTranslationXSliderChanged);
-    connect(&translationYSlider, &QSlider::valueChanged, this, &mainwindow::onTranslationYSliderChanged);
-    connect(&scalingXSlider, &QSlider::valueChanged, this, &mainwindow::onScalingXSliderChanged);
-    connect(&scalingYSlider, &QSlider::valueChanged, this, &mainwindow::onScalingYSliderChanged);
-
-    rotationLabel.show();
-    translationXLabel.show();
-    translationYLabel.show();
-    scalingXLabel.show();
-    scalingYLabel.show();
-
-    rotationSlider.show();
-    translationXSlider.show();
-    translationYSlider.show();
-    scalingXSlider.show();
-    scalingYSlider.show();
 }
 
 mainwindow::~mainwindow()
 {}
-
-void mainwindow::initializeSliders()
-{
-    rotationSlider.setEnabled(true);
-    translationXSlider.setEnabled(true);
-    translationYSlider.setEnabled(true);
-    scalingXSlider.setEnabled(true);
-    scalingYSlider.setEnabled(true);
-
-    rotationSlider.setRange(-180, 180);
-    translationXSlider.setRange(-100, 100);
-    translationYSlider.setRange(-100, 100);
-    scalingXSlider.setRange(0, 200);
-    scalingYSlider.setRange(0, 200);
-
-    polygon.computeCenterOfMass();
-    QPointF centerOfMass = polygon.getCenterOfMass();
-
-    double normalizedX = (centerOfMass.x() - 400) / 400.0;
-    double normalizedY = (centerOfMass.y() - 300) / 300.0;
-
-    /*translationXSlider.setValue(static_cast<int>(normalizedX * 100));
-    translationYSlider.setValue(static_cast<int>(normalizedY * 100));*/
-    
-    /*double angleRadians = atan2(centerOfMass.y() - 300, centerOfMass.x() - 400);
-    int angleDegrees = static_cast<int>(angleRadians * 180.0 / M_PI);
-    if (angleDegrees < 0) {
-        angleDegrees += 360;
-    }*/
-
-    translationXSlider.setValue(0);
-    translationYSlider.setValue(0);
-
-    rotationSlider.setValue(0);
-
-    scalingXSlider.setValue(100); 
-    scalingYSlider.setValue(100); 
-
-    initialized = true;
-}
 
 void mainwindow::mouseReleaseEvent(QMouseEvent* e)
 {
@@ -178,7 +55,6 @@ void mainwindow::mouseReleaseEvent(QMouseEvent* e)
                         if (isPolygonClosed())
                         {
                             polygonSaved = true;
-                            initializeSliders();
                         }
                         firstNode = aux;
                     }
@@ -201,13 +77,6 @@ void mainwindow::paintEvent(QPaintEvent* e)
 
     std::vector<Node*> nodes = polygon.getNodes();
     std::vector<Edge*> edges = polygon.getEdges();
-
-    painter.drawLine(oX);
-    painter.drawLine(oY);
-    painter.drawLine(xArrow);
-    painter.drawLine(yArrow);
-    painter.drawLine(xArrow2);
-    painter.drawLine(yArrow2);
 
     if (!polygonSaved)
     {
@@ -258,72 +127,6 @@ void mainwindow::paintEvent(QPaintEvent* e)
     }
 }
 
-void mainwindow::onRotationSliderChanged(int value)
-{
-    if (!initialized)
-        return;
-    double angle = value - rotationAngle;
-    rotationAngle = value;
-    polygon.computeCenterOfMass();
-    QPointF centerOfMass = polygon.getCenterOfMass();
-    for (auto& node : polygon.getNodes())
-    {
-        node->setCoordinates(Transformare::rotatePointAroundPoint(node->getCoordinates(), centerOfMass, angle)) ;
-    }
-    update();
-}
-
-void mainwindow::onScalingXSliderChanged(int value)
-{
-    if (!initialized)
-        return;
-	double scale = value / 100.0;
-    QPointF centerOfMass = polygon.getCenterOfMass();
-	for (auto& node : polygon.getNodes())
-	{
-        node->setCoordinates(Transformare::scalePointAroundPoint(node->getCoordinates(), centerOfMass, scale, 1));
-	}
-	update();
-}
-
-void mainwindow::onScalingYSliderChanged(int value)
-{
-    if (!initialized)
-        return;
-	double scale = value / 100.0;
-	for (auto& node : polygon.getNodes())
-	{
-		node->setCoordinates(Transformare::scalePointAroundPoint(node->getCoordinates(), QPoint(400, 300), 1, scale));
-	}
-	update();
-}
-
-void mainwindow::onTranslationXSliderChanged(int value)
-{
-    if (!initialized)
-        return;
-	double translationX = value / 100.0;
-	double translationY = translationYSlider.value() / 100.0;
-	for (auto& node : polygon.getNodes())
-	{
-		node->setCoordinates(Transformare::translatePoint(node->getCoordinates(), translationX, translationY));
-	}
-	update();
-}
-
-void mainwindow::onTranslationYSliderChanged(int value)
-{
-    if (!initialized)
-        return;
-	double translationY = value / 100.0;
-	double translationX = translationXSlider.value() / 100.0;
-	for (auto& node : polygon.getNodes())
-	{
-		node->setCoordinates(Transformare::translatePoint(node->getCoordinates(), translationX, translationY));
-	}
-	update();
-}
-
 void mainwindow::mouseMoveEvent(QMouseEvent* e)
 {
     if (!polygonSaved)
@@ -338,7 +141,7 @@ void mainwindow::mouseMoveEvent(QMouseEvent* e)
     }
     else
     {
-        if (shiftPressed)
+        if (rKeyPressed)
         {
             double angle = e->pos().x() - mouseLastPosition.x();
             polygon.computeCenterOfMass();
@@ -349,8 +152,43 @@ void mainwindow::mouseMoveEvent(QMouseEvent* e)
             }
             update();
         }
+        else if (tKeyPressed)
+		{
+			double translationX = (e->pos().x() - mouseLastPosition.x());
+			double translationY = (e->pos().y() - mouseLastPosition.y());
+			for (auto& node : polygon.getNodes())
+			{
+				node->setCoordinates(Transformare::translatePoint(node->getCoordinates(), translationX, translationY));
+			}
+			update();
+		}
     }
     mouseLastPosition = e->pos();
+}
+
+void mainwindow::wheelEvent(QWheelEvent* e)
+{
+	if (polygonSaved)
+	{
+        polygon.computeCenterOfMass();
+        QPointF centerOfMass = polygon.getCenterOfMass();
+        if (e->angleDelta().y() > 0)
+        {
+            for (auto& node : polygon.getNodes())
+            {
+                node->setCoordinates(Transformare::scalePointAroundPoint(node->getCoordinates(), centerOfMass, 1.1, 1.1));
+            }
+            update();
+        }
+        else
+		{
+			for (auto& node : polygon.getNodes())
+			{
+				node->setCoordinates(Transformare::scalePointAroundPoint(node->getCoordinates(), centerOfMass, 0.9, 0.9));
+			}
+            update();
+		}
+	}
 }
 
 void mainwindow::mousePressEvent(QMouseEvent* e)
@@ -372,18 +210,20 @@ void mainwindow::mousePressEvent(QMouseEvent* e)
 
 void mainwindow::keyPressEvent(QKeyEvent* event)
 {
-    if (event->key() == Qt::Key_Shift)
+    if (event->key() == Qt::Key_R)
     {
-        shiftPressed = true;
+        rKeyPressed = true;
     }
+    if (event->key() == Qt::Key_T)
+	{
+		tKeyPressed = true;
+	}
 }
 
 void mainwindow::keyReleaseEvent(QKeyEvent* event)
 {
-	if (event->key() == Qt::Key_Shift)
-	{
-		shiftPressed = false;
-	}
+   rKeyPressed = false;
+   tKeyPressed = false;
 }
 
 bool mainwindow::isPolygonClosed()
