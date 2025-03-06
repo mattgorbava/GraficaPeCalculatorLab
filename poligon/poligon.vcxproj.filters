@@ -21,6 +21,12 @@
       <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
       <Extensions>ts</Extensions>
     </Filter>
+    <Filter Include="Header Files\Widget headers">
+      <UniqueIdentifier>{a82bb8a2-6666-4d65-91cc-d954f1b36fa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Widget cpp">
+      <UniqueIdentifier>{54a029c4-bbcf-474b-9d90-ee2162a6a942}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="mainwindow.qrc">
@@ -52,6 +58,12 @@
     <ClCompile Include="Transformare.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PolygonWidget.cpp">
+      <Filter>Source Files\Widget cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="CurvedLineWidget.cpp">
+      <Filter>Source Files\Widget cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="edge.h">
@@ -66,5 +78,13 @@
     <ClInclude Include="Transformare.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="PolygonWidget.h">
+      <Filter>Header Files\Widget headers</Filter>
+    </QtMoc>
+    <QtMoc Include="CurvedLineWidget.h">
+      <Filter>Header Files\Widget headers</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>
