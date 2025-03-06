@@ -90,6 +90,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CurvedLine.cpp" />
     <ClCompile Include="CurvedLineWidget.cpp" />
     <ClCompile Include="node.cpp" />
     <ClCompile Include="PolygonWidget.cpp" />
@@ -104,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="CurvedLineWidget.h" />
+    <ClInclude Include="CurvedLine.h" />
     <ClInclude Include="edge.h" />
     <ClInclude Include="polygon.h" />
     <ClInclude Include="node.h" />

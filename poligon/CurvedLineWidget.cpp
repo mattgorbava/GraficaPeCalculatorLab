@@ -2,7 +2,8 @@
 
 CurvedLineWidget::CurvedLineWidget(QWidget* parent)
 	: QWidget(parent)
-{ }
+{
+}
 
 CurvedLineWidget::~CurvedLineWidget()
 { }

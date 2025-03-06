@@ -64,6 +64,9 @@
     <ClCompile Include="CurvedLineWidget.cpp">
       <Filter>Source Files\Widget cpp</Filter>
     </ClCompile>
+    <ClCompile Include="CurvedLine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="edge.h">
@@ -76,6 +79,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Transformare.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CurvedLine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
