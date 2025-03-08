@@ -7,16 +7,25 @@
 class CurvedLine
 {
 public:
+	enum class Predefined 
+	{
+		Elipse,
+		Spiral2D,
+		XSquaredPlus1,
+		Undefined
+	};
+
 	enum class Function
 	{
-		Undefined,
 		Linear,
+		Quadratic,
 		Exponential,
 		Logarithmic,
 		Sine,
 		Cosine,
 		Tangent,
-		Cotangent
+		Cotangent,
+		Undefined
 	};
 
 	struct Interval 
@@ -26,12 +35,20 @@ public:
 
 	CurvedLine();
 
-	CurvedLine(Function xFunction, Function yFunction, Interval interval);
+	CurvedLine(Predefined predefined);
+
+	CurvedLine(Function xFunction, Function yFunction, Interval interval, double xCoefficient, double yCoefficient);
 
 	QPointF getPoint(double u);
+
+	Interval getInterval() const;
 
 private:
 	Function xFunction;
 	Function yFunction;
+	double xCoefficient;
+	double yCoefficient;
 	Interval interval;
+
+	Predefined predefined;
 };
