@@ -26,6 +26,7 @@ private slots:
 
 protected:
     virtual void paintEvent(QPaintEvent* event) override;
+    virtual void resizeEvent(QResizeEvent* event) override;
     //virtual void mousePressEvent(QMouseEvent* event) override;
 
 private:
@@ -44,8 +45,8 @@ private:
     QTextEdit* resolutionTextEdit;
     QPushButton* saveButton;
     QPushButton* nextStepButton;
-    QLine* oXLine;
-    QLine* oYLine;
+    QLineF* oXLine;
+    QLineF* oYLine;
     QLine* oXArrow1, *oxArrow2;
     QLine* oYArrow1, *oYArrow2;
     QLabel* xLabel;
@@ -61,7 +62,11 @@ private:
     QLabel* resolutionLabel;
     QLabel* titleLabel;
 
+    Node* origin;
+
     double resolution = 100;
     bool curveSaved = false;
     int step = 0;
+
+    void updateLinesAndLabels();
 };

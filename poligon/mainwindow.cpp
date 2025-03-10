@@ -6,7 +6,7 @@ mainwindow::mainwindow(QWidget *parent)
     : QMainWindow(parent)
 {
     ui.setupUi(this);
-    this->setFixedSize(800, 600);
+    this->resize(800, 600);
     
     toolBar = new QToolBar("Tool Bar", this);
     addToolBar(Qt::TopToolBarArea, toolBar);
