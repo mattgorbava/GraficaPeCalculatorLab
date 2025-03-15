@@ -13,19 +13,24 @@ mainwindow::mainwindow(QWidget *parent)
 
     QAction* polygonAction = new QAction("Polygon", this);
     QAction* curvedLineAction = new QAction("Curved Line", this);
+    QAction* interpolationPolynomAction = new QAction("Interpolation Polynom", this);
     toolBar->addAction(polygonAction);
     toolBar->addAction(curvedLineAction);
+    toolBar->addAction(interpolationPolynomAction);
 
     connect(polygonAction, &QAction::triggered, this, &mainwindow::showPolygonWidget);
     connect(curvedLineAction, &QAction::triggered, this, &mainwindow::showCurvedLineWidget);
+    connect(interpolationPolynomAction, &QAction::triggered, this, &mainwindow::showInterpolationPolynomWidget);
 
     centralStackedWidget = new QStackedWidget(this);
 
     polygonWidget = new PolygonWidget(this);
     curvedLineWidget = new CurvedLineWidget(this);
+    interpolationPolynomWidget = new InterpolationPolynomWidget(this);
 
     centralStackedWidget->addWidget(polygonWidget);
     centralStackedWidget->addWidget(curvedLineWidget);
+    centralStackedWidget->addWidget(interpolationPolynomWidget);
 
     setCentralWidget(centralStackedWidget);
 
@@ -45,4 +50,10 @@ void mainwindow::showCurvedLineWidget()
 {
 	centralStackedWidget->setCurrentWidget(curvedLineWidget);
 	curvedLineWidget->setFocus();
+}
+
+void mainwindow::showInterpolationPolynomWidget()
+{
+	centralStackedWidget->setCurrentWidget(interpolationPolynomWidget);
+	interpolationPolynomWidget->setFocus();
 }

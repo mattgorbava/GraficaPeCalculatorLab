@@ -7,6 +7,7 @@
 #include <QActionGroup>
 #include "PolygonWidget.h"
 #include "CurvedLineWidget.h"
+#include "InterpolationPolynomWidget.h"
 
 class mainwindow : public QMainWindow
 {
@@ -19,6 +20,7 @@ public:
 private slots:
     void showPolygonWidget();
     void showCurvedLineWidget();
+    void showInterpolationPolynomWidget();
 
 private:
     Ui::mainwindowClass ui;
@@ -26,4 +28,5 @@ private:
     QStackedWidget* centralStackedWidget;
     PolygonWidget* polygonWidget;
     CurvedLineWidget* curvedLineWidget;
+    InterpolationPolynomWidget* interpolationPolynomWidget;
 };

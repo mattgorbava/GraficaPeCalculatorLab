@@ -27,6 +27,12 @@
     <Filter Include="Source Files\Widget cpp">
       <UniqueIdentifier>{54a029c4-bbcf-474b-9d90-ee2162a6a942}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Graphical objects headers">
+      <UniqueIdentifier>{a6a654f0-fc44-4d0f-9c7e-fa4d1342458d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphical objects cpp">
+      <UniqueIdentifier>{11155882-36a6-44da-857c-b83c0c47b95c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="mainwindow.qrc">
@@ -35,54 +41,60 @@
     <QtUic Include="mainwindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtMoc Include="mainwindow.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <ClCompile Include="mainwindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="edge.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="polygon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="node.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Transformare.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PolygonWidget.cpp">
       <Filter>Source Files\Widget cpp</Filter>
     </ClCompile>
     <ClCompile Include="CurvedLineWidget.cpp">
       <Filter>Source Files\Widget cpp</Filter>
     </ClCompile>
+    <ClCompile Include="InterpolationPolynomWidget.cpp">
+      <Filter>Source Files\Widget cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwindow.cpp">
+      <Filter>Source Files\Widget cpp</Filter>
+    </ClCompile>
     <ClCompile Include="CurvedLine.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Graphical objects cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="edge.cpp">
+      <Filter>Source Files\Graphical objects cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files\Graphical objects cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="node.cpp">
+      <Filter>Source Files\Graphical objects cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="polygon.cpp">
+      <Filter>Source Files\Graphical objects cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Transformare.cpp">
+      <Filter>Source Files\Graphical objects cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Polynom.cpp">
+      <Filter>Source Files\Graphical objects cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="edge.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="CurvedLine.h">
+      <Filter>Header Files\Graphical objects headers</Filter>
     </ClInclude>
-    <ClInclude Include="polygon.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="edge.h">
+      <Filter>Header Files\Graphical objects headers</Filter>
     </ClInclude>
     <ClInclude Include="node.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Graphical objects headers</Filter>
+    </ClInclude>
+    <ClInclude Include="polygon.h">
+      <Filter>Header Files\Graphical objects headers</Filter>
     </ClInclude>
     <ClInclude Include="Transformare.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Graphical objects headers</Filter>
     </ClInclude>
-    <ClInclude Include="CurvedLine.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Polynom.h">
+      <Filter>Header Files\Graphical objects headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +102,12 @@
       <Filter>Header Files\Widget headers</Filter>
     </QtMoc>
     <QtMoc Include="CurvedLineWidget.h">
+      <Filter>Header Files\Widget headers</Filter>
+    </QtMoc>
+    <QtMoc Include="mainwindow.h">
+      <Filter>Header Files\Widget headers</Filter>
+    </QtMoc>
+    <QtMoc Include="InterpolationPolynomWidget.h">
       <Filter>Header Files\Widget headers</Filter>
     </QtMoc>
   </ItemGroup>

@@ -92,8 +92,10 @@
   <ItemGroup>
     <ClCompile Include="CurvedLine.cpp" />
     <ClCompile Include="CurvedLineWidget.cpp" />
+    <ClCompile Include="InterpolationPolynomWidget.cpp" />
     <ClCompile Include="node.cpp" />
     <ClCompile Include="PolygonWidget.cpp" />
+    <ClCompile Include="Polynom.cpp" />
     <ClCompile Include="Transformare.cpp" />
     <QtRcc Include="mainwindow.qrc" />
     <QtUic Include="mainwindow.ui" />
@@ -107,9 +109,11 @@
     <QtMoc Include="CurvedLineWidget.h" />
     <ClInclude Include="CurvedLine.h" />
     <ClInclude Include="edge.h" />
+    <QtMoc Include="InterpolationPolynomWidget.h" />
     <ClInclude Include="polygon.h" />
     <ClInclude Include="node.h" />
     <QtMoc Include="PolygonWidget.h" />
+    <ClInclude Include="Polynom.h" />
     <ClInclude Include="Transformare.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
