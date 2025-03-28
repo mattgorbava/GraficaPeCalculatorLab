@@ -2,7 +2,37 @@
 
 InterpolationPolynomWidget::InterpolationPolynomWidget(QWidget* parent)
 	: QWidget(parent)
-{ }
+{
+	newtonButton = new QPushButton("Newton", this);
+	newtonButton->setGeometry(10, 10, 100, 30);
+	connect(newtonButton, SIGNAL(clicked()), this, SLOT(newtonButtonClicked()));
+
+	lagrangeButton = new QPushButton("Lagrange", this);
+	lagrangeButton->setGeometry(120, 10, 100, 30);
+	connect(lagrangeButton, SIGNAL(clicked()), this, SLOT(lagrangeButtonClicked()));
+}
+
+void InterpolationPolynomWidget::newtonButtonClicked()
+{
+	if (!polynomSaved)
+		popLastNine();
+	interpolationType = InterpolationType::Newton;
+	polynom.computeCoefficientsNewton(initialNodes);
+	computePolygonPointsAndEdges(polynom.getCoefficients());
+	polynomSaved = true;
+	update();
+}
+
+void InterpolationPolynomWidget::lagrangeButtonClicked()
+{
+	if (!polynomSaved)
+		popLastNine();
+	interpolationType = InterpolationType::Lagrange;
+	polynom.computeCoefficientsLagrange(initialNodes);
+	computePolygonPointsAndEdges(polynom.getCoefficients());
+	polynomSaved = true;
+	update();
+}
 
 InterpolationPolynomWidget::~InterpolationPolynomWidget()
 { }
@@ -11,17 +41,22 @@ void InterpolationPolynomWidget::mouseReleaseEvent(QMouseEvent* event)
 {
 	if (!polynomSaved)
 	{
-		if (event->button() == Qt::LeftButton)
+		if (event->button() == Qt::LeftButton && event->pos().x() > lastX)
 		{
 			polygon.addNode(event->pos());
+			lastX = event->pos().x();
+			initialNodes.push_back(new Node(event->pos()));
 			addNineEmptyNodes();
 			update();
 		}
-		if (event->button() == Qt::RightButton)
+	}
+	else
+	{
+		if (event->button() == Qt::LeftButton)
 		{
-			polynomSaved = true;
-			polynom = Polynom(polygon);
-			update();
+			draggedNode = aux;
+			draggedInitialNode = aux;
+			isDragging = false;
 		}
 	}
 }
@@ -31,13 +66,29 @@ void InterpolationPolynomWidget::computePolygonPointsAndEdges(std::vector<double
 	std::vector<Node*> nodes = polygon.getNodes();
 	std::vector<Edge*> edges = polygon.getEdges();
 
+	polygon.clearEdges();
 	for (int i = 0; i < nodes.size(); i++)
 	{
+		double xBetween;
+		if (i % 10 == 0 && i != nodes.size() - 1)
+		{
+			xBetween = (nodes[i + 10]->getCoordX() - nodes[i]->getCoordX()) / 10.0;
+		}
 		if (i % 10 != 0)
 		{
-			double xBetween = (nodes[i / 10]->getCoordX() + nodes[i / 10 + 10]->getCoordX()) / 10.0;
 			double x = nodes[i - 1]->getCoordX() + xBetween;
-			double y = polynom.computeValue(x);
+			double y = 0.0;
+			switch (interpolationType)
+			{
+			case InterpolationPolynomWidget::InterpolationType::Newton:
+				y = polynom.computeValueNewton(x, initialNodes);
+				break;
+			case InterpolationPolynomWidget::InterpolationType::Lagrange:
+				y = polynom.computeValueLagrange(x, initialNodes);
+				break;
+			default:
+				break;
+			}
 			nodes[i]->setCoordinates(QPointF(x, y));
 		}
 	}
@@ -56,16 +107,10 @@ void InterpolationPolynomWidget::paintEvent(QPaintEvent* event)
 	std::vector<Node*> nodes = polygon.getNodes();
 	std::vector<Edge*> edges = polygon.getEdges();
 
-	if (nodes.size() > 0)
+	for (int i = 0; i < nodes.size(); i+=10)
 	{
-		for (auto& node : nodes)
-		{
-			if (node->getCoordX() != -1 && node->getCoordY() != -1)
-			{
-				painter.setBrush(Qt::black);
-				painter.drawEllipse(node->getCoordinates(), 5, 5);
-			}
-		}
+		painter.setBrush(Qt::black);
+		painter.drawEllipse(nodes[i]->getCoordinates(), 5, 5);
 	}
 	if (edges.size() > 0)
 	{
@@ -81,10 +126,58 @@ void InterpolationPolynomWidget::paintEvent(QPaintEvent* event)
 	}
 }
 
+void InterpolationPolynomWidget::mousePressEvent(QMouseEvent* e)
+{
+	if (polynomSaved)
+	{
+		std::vector<Node*> nodes = polygon.getNodes();
+		for (int i = 0; i < nodes.size(); i+=10)
+		{
+			if (fabs(nodes[i]->getCoordX() - e->pos().x()) < 10 && fabs(nodes[i]->getCoordY() - e->pos().y()) < 10)
+			{
+				draggedNode = nodes[i];
+				draggedInitialNode = initialNodes[i / 10];
+				isDragging = true;
+				break;
+			}
+		}
+	}
+}
+
+void InterpolationPolynomWidget::mouseMoveEvent(QMouseEvent* e)
+{
+	if (isDragging)
+	{
+		draggedNode->setCoordinates(e->pos());
+		draggedInitialNode->setCoordinates(e->pos());
+		switch (interpolationType)
+		{
+		case InterpolationPolynomWidget::InterpolationType::Newton:
+			polynom.computeCoefficientsNewton(initialNodes);
+			break;
+		case InterpolationPolynomWidget::InterpolationType::Lagrange:
+			polynom.computeCoefficientsLagrange(initialNodes);
+			break;
+		default:
+			break;
+		}
+		computePolygonPointsAndEdges(polynom.getCoefficients());
+		update();
+	}
+}
+
 void InterpolationPolynomWidget::addNineEmptyNodes()
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 9; i++)
 	{
 		polygon.addNode(QPoint(-1, -1));
+	}
+}
+
+void InterpolationPolynomWidget::popLastNine()
+{
+	for (int i = 0; i < 9; i++)
+	{
+		polygon.popBack();
 	}
 }

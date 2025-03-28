@@ -8,6 +8,9 @@
 #include "PolygonWidget.h"
 #include "CurvedLineWidget.h"
 #include "InterpolationPolynomWidget.h"
+#include "Bezier.h"
+#include "Hermite.h"
+#include "BSplineWidget.h"
 
 class mainwindow : public QMainWindow
 {
@@ -21,6 +24,9 @@ private slots:
     void showPolygonWidget();
     void showCurvedLineWidget();
     void showInterpolationPolynomWidget();
+    void showBezierWidget();
+    void showHermiteWidget();
+    void showBSplineWidget();
 
 private:
     Ui::mainwindowClass ui;
@@ -29,4 +35,7 @@ private:
     PolygonWidget* polygonWidget;
     CurvedLineWidget* curvedLineWidget;
     InterpolationPolynomWidget* interpolationPolynomWidget;
+    Bezier* bezier;
+    Hermite* hermite;
+    BSplineWidget* bSpline;
 };

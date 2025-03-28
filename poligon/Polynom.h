@@ -7,13 +7,15 @@ class Polynom
 {
 public:
 	Polynom() { }
-	Polynom(Polygon& polygon);
+	//Polynom(std::vector<Node*> nodes);
 	~Polynom();
 
-	double computeValue(double x);
+	double computeValueNewton(double x, std::vector<Node*> nodes);
+	double computeValueLagrange(double x, std::vector<Node*> nodes);
 	std::vector<double> getCoefficients() { return coefficients; }
+	void computeCoefficientsNewton(std::vector<Node*> nodes);
+	void computeCoefficientsLagrange(std::vector<Node*> nodes);
 
 private:
-	void computeCoefficients(Polygon& polygon);
 	std::vector<double> coefficients;
 };

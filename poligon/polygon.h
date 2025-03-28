@@ -13,6 +13,8 @@ public:
 	void addEdge(Node* source, Node* destination);
 	void addEdge(Edge* edge);
 	void computeCenterOfMass();
+	void popBack();
+	void clearEdges();
 
 	std::vector<Node*> getNodes() const;
 	std::vector<Edge*> getEdges() const;

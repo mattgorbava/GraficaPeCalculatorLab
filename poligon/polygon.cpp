@@ -55,3 +55,16 @@ QPointF Polygon::getCenterOfMass() const
 {
 	return centerOfMass;
 }
+
+void Polygon::popBack()
+{
+	if (!nodes.empty())
+	{
+		nodes.pop_back();
+	}
+}
+
+void Polygon::clearEdges()
+{
+	edges.clear();
+}

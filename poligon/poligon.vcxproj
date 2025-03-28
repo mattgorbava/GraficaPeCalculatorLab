@@ -90,6 +90,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BSpline.cpp" />
+    <ClCompile Include="BSplineWidget.cpp" />
     <ClCompile Include="CurvedLine.cpp" />
     <ClCompile Include="CurvedLineWidget.cpp" />
     <ClCompile Include="InterpolationPolynomWidget.cpp" />
@@ -107,9 +109,13 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="CurvedLineWidget.h" />
+    <QtMoc Include="Bezier.h" />
+    <ClInclude Include="BSpline.h" />
+    <QtMoc Include="BSplineWidget.h" />
     <ClInclude Include="CurvedLine.h" />
     <ClInclude Include="edge.h" />
     <QtMoc Include="InterpolationPolynomWidget.h" />
+    <QtMoc Include="Hermite.h" />
     <ClInclude Include="polygon.h" />
     <ClInclude Include="node.h" />
     <QtMoc Include="PolygonWidget.h" />
