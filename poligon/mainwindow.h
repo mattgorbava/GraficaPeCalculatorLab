@@ -11,6 +11,8 @@
 #include "Bezier.h"
 #include "Hermite.h"
 #include "BSplineWidget.h"
+#include "InOutPolygonWidget.h"
+#include "TriangulationWidget.h"
 
 class mainwindow : public QMainWindow
 {
@@ -27,6 +29,8 @@ private slots:
     void showBezierWidget();
     void showHermiteWidget();
     void showBSplineWidget();
+    void showInOutPolygonWidget();
+    void showTriangulationWidget();
 
 private:
     Ui::mainwindowClass ui;
@@ -38,4 +42,6 @@ private:
     Bezier* bezier;
     Hermite* hermite;
     BSplineWidget* bSpline;
+    InOutPolygonWidget* inOutPolygonWidget;
+    TriangulationWidget* triangulationWidget;
 };

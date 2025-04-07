@@ -19,6 +19,9 @@ public:
 	std::vector<Node*> getNodes() const;
 	std::vector<Edge*> getEdges() const;
 	QPointF getCenterOfMass() const;
+
+	bool isEdge(Node* source, Node* destination);
+	bool isDiagonal(Node* source, Node* destination);
 private:
 	std::vector<Node*> nodes;
 	std::vector<Edge*> edges;

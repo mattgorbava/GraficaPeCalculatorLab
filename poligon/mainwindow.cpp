@@ -17,12 +17,16 @@ mainwindow::mainwindow(QWidget *parent)
     QAction* bezierAction = new QAction("Bezier", this);
     QAction* hermiteAction = new QAction("Hermite", this);
     QAction* bSplineAction = new QAction("B-Spline", this);
+    QAction* inOutPolygonAction = new QAction("In/Out Polygon", this);
+    QAction* triangulationAction = new QAction("Triangulation", this);
     toolBar->addAction(polygonAction);
     toolBar->addAction(curvedLineAction);
     toolBar->addAction(interpolationPolynomAction);
     toolBar->addAction(bezierAction);
     toolBar->addAction(hermiteAction);
     toolBar->addAction(bSplineAction);
+    toolBar->addAction(inOutPolygonAction);
+    toolBar->addAction(triangulationAction);
 
     connect(polygonAction, &QAction::triggered, this, &mainwindow::showPolygonWidget);
     connect(curvedLineAction, &QAction::triggered, this, &mainwindow::showCurvedLineWidget);
@@ -30,6 +34,8 @@ mainwindow::mainwindow(QWidget *parent)
     connect(bezierAction, &QAction::triggered, this, &mainwindow::showBezierWidget);
     connect(hermiteAction, &QAction::triggered, this, &mainwindow::showHermiteWidget);
     connect(bSplineAction, &QAction::triggered, this, &mainwindow::showBSplineWidget);
+    connect(inOutPolygonAction, &QAction::triggered, this, &mainwindow::showInOutPolygonWidget);
+    connect(triangulationAction, &QAction::triggered, this, &mainwindow::showTriangulationWidget);
 
     centralStackedWidget = new QStackedWidget(this);
 
@@ -39,6 +45,8 @@ mainwindow::mainwindow(QWidget *parent)
     bezier = new Bezier(this);
     hermite = new Hermite(this);
     bSpline = new BSplineWidget(this);
+    inOutPolygonWidget = new InOutPolygonWidget(this);
+    triangulationWidget = new TriangulationWidget(this);
 
     centralStackedWidget->addWidget(polygonWidget);
     centralStackedWidget->addWidget(curvedLineWidget);
@@ -46,6 +54,8 @@ mainwindow::mainwindow(QWidget *parent)
     centralStackedWidget->addWidget(bezier);
     centralStackedWidget->addWidget(hermite);
     centralStackedWidget->addWidget(bSpline);
+    centralStackedWidget->addWidget(inOutPolygonWidget);
+    centralStackedWidget->addWidget(triangulationWidget);
 
     setCentralWidget(centralStackedWidget);
 
@@ -89,4 +99,16 @@ void mainwindow::showBSplineWidget()
 {
 	centralStackedWidget->setCurrentWidget(bSpline);
 	bSpline->setFocus();
+}
+
+void mainwindow::showInOutPolygonWidget()
+{
+	centralStackedWidget->setCurrentWidget(inOutPolygonWidget);
+	inOutPolygonWidget->setFocus();
+}
+
+void mainwindow::showTriangulationWidget()
+{
+	centralStackedWidget->setCurrentWidget(triangulationWidget);
+	triangulationWidget->setFocus();
 }

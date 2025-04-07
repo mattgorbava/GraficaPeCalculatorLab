@@ -10,6 +10,11 @@ public:
 	Node(QPointF coordinates);
 	~Node() = default;
 
+	bool operator==(const Node* other) const {
+		return (this->coordinates.x() == other->coordinates.x() &&
+			this->coordinates.y() == other->coordinates.y());
+	}
+
 	int getCoordX() const;
 	int getCoordY() const;
 	int getValue() const;

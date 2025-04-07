@@ -92,13 +92,16 @@
   <ItemGroup>
     <ClCompile Include="BSpline.cpp" />
     <ClCompile Include="BSplineWidget.cpp" />
+    <ClCompile Include="ComputationalGeometry.cpp" />
     <ClCompile Include="CurvedLine.cpp" />
     <ClCompile Include="CurvedLineWidget.cpp" />
+    <ClCompile Include="InOutPolygonWidget.cpp" />
     <ClCompile Include="InterpolationPolynomWidget.cpp" />
     <ClCompile Include="node.cpp" />
     <ClCompile Include="PolygonWidget.cpp" />
     <ClCompile Include="Polynom.cpp" />
     <ClCompile Include="Transformare.cpp" />
+    <ClCompile Include="TriangulationWidget.cpp" />
     <QtRcc Include="mainwindow.qrc" />
     <QtUic Include="mainwindow.ui" />
     <QtMoc Include="mainwindow.h" />
@@ -108,14 +111,18 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Triangulation.h" />
+    <QtMoc Include="TriangulationWidget.h" />
     <QtMoc Include="CurvedLineWidget.h" />
     <QtMoc Include="Bezier.h" />
     <ClInclude Include="BSpline.h" />
     <QtMoc Include="BSplineWidget.h" />
+    <ClInclude Include="ComputationalGeometry.h" />
     <ClInclude Include="CurvedLine.h" />
     <ClInclude Include="edge.h" />
     <QtMoc Include="InterpolationPolynomWidget.h" />
     <QtMoc Include="Hermite.h" />
+    <QtMoc Include="InOutPolygonWidget.h" />
     <ClInclude Include="polygon.h" />
     <ClInclude Include="node.h" />
     <QtMoc Include="PolygonWidget.h" />

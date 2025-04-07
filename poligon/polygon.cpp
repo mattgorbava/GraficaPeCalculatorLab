@@ -68,3 +68,29 @@ void Polygon::clearEdges()
 {
 	edges.clear();
 }
+
+bool Polygon::isEdge(Node* source, Node* destination)
+{
+	for (Edge* edge : edges)
+	{
+		if ((edge->getFirstNode() == source && edge->getSecondNode() == destination) ||
+			(edge->getFirstNode() == destination && edge->getSecondNode() == source))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Polygon::isDiagonal(Node* source, Node* destination)
+{
+	for (Edge* edge : edges)
+	{
+		if ((edge->getFirstNode() == source && edge->getSecondNode() == destination) ||
+			(edge->getFirstNode() == destination && edge->getSecondNode() == source))
+		{
+			return false;
+		}
+	}
+	return true;
+}

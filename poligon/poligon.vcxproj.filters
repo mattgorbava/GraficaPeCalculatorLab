@@ -82,6 +82,15 @@
     <ClCompile Include="BSplineWidget.cpp">
       <Filter>Source Files\Widget cpp</Filter>
     </ClCompile>
+    <ClCompile Include="ComputationalGeometry.cpp">
+      <Filter>Source Files\Graphical objects cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="InOutPolygonWidget.cpp">
+      <Filter>Source Files\Widget cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="TriangulationWidget.cpp">
+      <Filter>Source Files\Widget cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CurvedLine.h">
@@ -105,6 +114,12 @@
     <ClInclude Include="BSpline.h">
       <Filter>Header Files\Widget headers</Filter>
     </ClInclude>
+    <ClInclude Include="ComputationalGeometry.h">
+      <Filter>Header Files\Graphical objects headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangulation.h">
+      <Filter>Header Files\Graphical objects headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="PolygonWidget.h">
@@ -126,6 +141,12 @@
       <Filter>Header Files\Widget headers</Filter>
     </QtMoc>
     <QtMoc Include="BSplineWidget.h">
+      <Filter>Header Files\Widget headers</Filter>
+    </QtMoc>
+    <QtMoc Include="InOutPolygonWidget.h">
+      <Filter>Header Files\Widget headers</Filter>
+    </QtMoc>
+    <QtMoc Include="TriangulationWidget.h">
       <Filter>Header Files\Widget headers</Filter>
     </QtMoc>
   </ItemGroup>
